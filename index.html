@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTN CEM | Customer Experience Management</title>
+    <meta name="description" content="Optimizing Customer Experience for MTN Networks with real-time monitoring and analytics.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-slate-200 font-sans overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar glass-dark">
+        <div class="sidebar-header">
+            <div class="logo-container" onclick="navigateTo('landing')">
+                <div class="logo-icon">
+                    <i data-lucide="radio-tower"></i>
+                </div>
+                <h1 class="logo-text">MTN CEM</h1>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="nav-item" onclick="navigateTo('dashboard')" data-view="dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Operations Dashboard</span>
+                <div class="active-indicator"></div>
+            </button>
+            <button class="nav-item" onclick="navigateTo('analytics')" data-view="analytics">
+                <i data-lucide="bar-chart-3"></i>
+                <span>Network Analytics</span>
+            </button>
+            <button class="nav-item" onclick="navigateTo('complaints')" data-view="complaints">
+                <i data-lucide="message-square"></i>
+                <span>Complaint Management</span>
+            </button>
+            <button class="nav-item" onclick="navigateTo('feedback')" data-view="feedback">
+                <i data-lucide="star"></i>
+                <span>Customer Feedback</span>
+            </button>
+            <button class="nav-item" onclick="navigateTo('sustainability')" data-view="sustainability">
+                <i data-lucide="leaf"></i>
+                <span>Sustainability</span>
+            </button>
+
+            <div class="nav-divider"></div>
+
+            <button class="nav-item" onclick="navigateTo('landing')">
+                <i data-lucide="home"></i>
+                <span>Back to Home</span>
+            </button>
+            <button class="nav-item logout-btn" onclick="logout()">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar-container">
+                    <img src="assets/images/manager.jpg" alt="Avatar" onerror="this.onerror=null; this.src='https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png';">
+                    <div class="status-dot"></div>
+                </div>
+                <div class="user-info">
+                    <p class="user-name">Admin</p>
+                    <p class="user-role">CEM Manager</p>
+                </div>
+                <i data-lucide="settings" class="settings-icon"></i>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header id="main-header" class="glass-header">
+            <div class="header-left">
+                <button class="menu-btn" onclick="toggleSidebar()">
+                    <i data-lucide="menu"></i>
+                </button>
+                <div class="page-title">
+                    <h2 id="page-title-text">Operations Dashboard</h2>
+                    <span class="facility-name">MTN Ghana Network</span>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="status-indicator hidden-mobile">
+                    <div class="status-dot-pulse"></div>
+                    <span>System Live</span>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="icon-btn" onclick="showToast('Check notifications for alerts', 'info')">
+                        <i data-lucide="bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="icon-btn" onclick="showToast('Opening Profile', 'info')">
+                        <i data-lucide="user"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Views Container -->
+        <div id="views-container" class="views-container">
+            
+            <!-- Landing Page View -->
+            <section id="view-landing" class="view active">
+                <div class="landing-hero-bg">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=2000&h=1000&fit=crop&q=80" alt="Background">
+                    <div class="overlay"></div>
+                </div>
+
+                <nav class="landing-nav">
+                    <div class="landing-logo modal-trigger" onclick="navigateTo('landing')">
+                        <div class="logo-box">
+                            <i data-lucide="radio-tower"></i>
+                        </div>
+                        <div class="logo-text-group">
+                            <h1>MTN CEM</h1>
+                            <span>Customer Experience Management</span>
+                        </div>
+                    </div>
+                    <div class="landing-links">
+                        <button onclick="navigateTo('dashboard')">Solutions</button>
+                        <button onclick="navigateTo('sustainability')">Sustainability</button>
+                        <div class="divider"></div>
+                        <button class="cta-btn" onclick="navigateTo('dashboard')">Enterprise Login</button>
+                    </div>
+                    <button class="mobile-login-btn" onclick="navigateTo('dashboard')">Login</button>
+                </nav>
+
+                <div class="landing-content">
+                    <div class="location-badge">
+                        <i data-lucide="map-pin"></i>
+                        <span>HQ: Accra, Ghana</span>
+                    </div>
+
+                    <h1 class="hero-title">Optimizing <span class="text-gradient">Customer Experience</span> for MTN Networks</h1>
+                    
+                    <p class="hero-desc">
+                        MTN CEM System enhances customer satisfaction with real-time monitoring, 
+                        proactive analytics, and efficient complaint resolution.
+                    </p>
+
+                    <div class="hero-actions">
+                        <button class="primary-btn" onclick="navigateTo('dashboard')">
+                            <span>Launch Command Center</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                        <button class="secondary-btn" onclick="navigateTo('sustainability')">
+                            View Sustainability Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&q=80" alt="Analytics">
+                            <div class="image-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-icon emerald">
+                                <i data-lucide="activity"></i>
+                            </div>
+                            <h3>Network Monitoring</h3>
+                            <p>Real-time analytics on network performance and user engagement.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1526628953301-3e589a59ad8f?w=800&h=400&fit=crop&q=80" alt="Support">
+                            <div class="image-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-icon amber">
+                                <i data-lucide="headphones"></i>
+                            </div>
+                            <h3>Customer Support</h3>
+                            <p>Efficient handling of queries and complaints for better satisfaction.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card wide">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=400&fit=crop&q=80" alt="Data">
+                            <div class="image-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-icon blue">
+                                <i data-lucide="database"></i>
+                            </div>
+                            <h3>Data Insights</h3>
+                            <p>Predictive analytics for proactive customer experience improvements.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <footer class="landing-footer">
+                   <p>© 2026 MTN Ghana. CEM System V2.0</p>
+                   <div class="footer-links">
+                        <span><i data-lucide="shield"></i> Enterprise Core</span>
+                        <span><i data-lucide="globe"></i> Region: West Africa</span>
+                   </div>
+                </footer>
+            </section>
+
+            <!-- Dashboard View -->
+            <section id="view-dashboard" class="view">
+                <div class="dashboard-banner">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=250&fit=crop&q=80" alt="Dashboard Banner">
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <h2>CEM Commander <span class="text-emerald">Beta</span></h2>
+                        <p>Accra Network Hub • Sector GH</p>
+                    </div>
+                    <div class="banner-stats">
+                        <div class="stat-item">
+                            <span class="label">Uptime</span>
+                            <span class="value">99.8%</span>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="stat-item">
+                            <span class="label">Active Users</span>
+                            <span class="value">45M</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-grid">
+                    <!-- KPI Templates populated by JS -->
+                    <div class="kpi-card" data-kpi="nps"></div>
+                    <div class="kpi-card" data-kpi="resolution"></div>
+                    <div class="kpi-card" data-kpi="churn"></div>
+                    <div class="kpi-card" data-kpi="engagement"></div>
+                </div>
+
+                <div class="dashboard-grid-main">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <div>
+                                <h3>Customer Satisfaction Trend</h3>
+                                <p>Real-time NPS analytics</p>
+                            </div>
+                            <div class="legend">
+                                <div class="legend-item"><span class="dot emerald"></span> Actual</div>
+                                <div class="legend-item"><span class="dot slate"></span> Target</div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="satisfactionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="health-card">
+                        <div class="card-header simple">
+                            <div class="icon-box emerald"><i data-lucide="shield-check"></i></div>
+                            <h3>System Alerts</h3>
+                        </div>
+                        <div class="alerts-list">
+                            <div class="alert-item red">
+                                <div class="icon"><i data-lucide="alert-triangle"></i></div>
+                                <div class="content">
+                                    <h4>Critical: Network Outage</h4>
+                                    <p>Tema region signal drop. Action required.</p>
+                                </div>
+                            </div>
+                            <div class="alert-item amber">
+                                <div class="icon"><i data-lucide="wrench"></i></div>
+                                <div class="content">
+                                    <h4>High Complaint Volume</h4>
+                                    <p>Data speed issues in Kumasi.</p>
+                                </div>
+                            </div>
+                            <div class="alert-item emerald">
+                                <div class="icon"><i data-lucide="zap"></i></div>
+                                <div class="content">
+                                    <h4>Promotion Success</h4>
+                                    <p>New bundle uptake increased by 15%.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="security-status">
+                            <div class="status-header">
+                                <span>Network Status</span>
+                                <span class="status-ok">STABLE</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 98%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diagnostics-bar">
+                    <div class="bg-image"><img src="https://images.unsplash.com/photo-1504384307490-72cc78dc8d40?w=1200&h=100&fit=crop&q=80"></div>
+                    <div class="d-overlay"></div>
+                    <div class="d-content">
+                        <div class="d-icon"><i data-lucide="network"></i></div>
+                        <div class="d-text">
+                            <h3>Diagnostic Tools</h3>
+                            <p>Status: <span class="text-emerald">All Systems Operational</span></p>
+                        </div>
+                    </div>
+                    <button id="diagnostic-btn" class="d-btn" onclick="runDiagnostics()">
+                        <i data-lucide="activity"></i>
+                        <span id="diagnostic-text">Run Network Scan</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Analytics View -->
+            <section id="view-analytics" class="view">
+                 <div class="section-header">
+                    <h2>Network Analytics</h2>
+                    <p>Real-time data usage and performance metrics.</p>
+                </div>
+                <div class="chart-card">
+                    <h3>Data Usage Trends (24h)</h3>
+                    <div class="chart-container large">
+                        <canvas id="analyticsChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Complaints View -->
+            <section id="view-complaints" class="view">
+                 <div class="section-header">
+                    <h2>Complaint Management</h2>
+                    <p>Track and resolve customer issues efficiently.</p>
+                </div>
+                <div class="table-card">
+                    <table id="complaints-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Issue Type</th>
+                                <th>Status</th>
+                                <th>Filed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Feedback View -->
+            <section id="view-feedback" class="view">
+                <div class="section-header">
+                    <h2>Customer Feedback</h2>
+                    <p>Monitor NPS scores and user ratings.</p>
+                </div>
+                <div class="chart-card">
+                    <h3>Feedback Distribution</h3>
+                    <div class="chart-container circle">
+                        <canvas id="feedbackChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sustainability View -->
+            <section id="view-sustainability" class="view">
+                <div class="section-header">
+                    <h2>Sustainability & CSR</h2>
+                    <p>Track eco-friendly initiatives and impact.</p>
+                </div>
+                <div class="sustainability-dashboard">
+                   <div class="chart-card half">
+                        <h3>Carbon Footprint Reduction</h3>
+                        <div class="chart-container circle">
+                            <canvas id="sustainabilityChart"></canvas>
+                        </div>
+                   </div>
+                   <div class="info-card">
+                       <h3>Impact Report</h3>
+                       <p>Through green energy adoption and digital services, we've reduced emissions by 35% this year.</p>
+                   </div>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- Toasts -->
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
