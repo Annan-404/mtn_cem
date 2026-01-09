@@ -8,7 +8,7 @@ A **modern, frontend-only enterprise dashboard** designed to visualize and manag
 ## **Live Demo**
 
 🔗 **Hosted Application:**
-[https://example.com/mtn-cem-system] (Replace with actual deployment link if hosted)
+ https://annan-404.github.io/mtn_cem/
 
 ---
 
@@ -132,3 +132,4 @@ No additional configuration is required.
 ## **License**
 
 This project was developed strictly for **academic and educational purposes**.
+
